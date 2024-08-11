@@ -1,4 +1,5 @@
 #include "TrafficManager.hpp"
+using namespace std;
 
 // Initialize the city with dummy intersections and roads.
 void TrafficManager::initializeCity(int numIntersections, int numRoads) {
@@ -34,13 +35,13 @@ void TrafficManager::initializeCity(int numIntersections, int numRoads) {
 }
 
 // Dijkstra's algorithm to calculate the shortest path between two intersections
-std::vector<int> TrafficManager::calculateShortestPath(int start, int destination) {
-    std::map<int, int> distances;
-    std::map<int, int> previous;
-    std::priority_queue<std::pair<int, int>, std::vector<std::pair<int, int>>, std::greater<>> pq;
+vector<int> TrafficManager::calculateShortestPath(int start, int destination) {
+    map<int, int> distances;
+    map<int, int> previous;
+    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<>> pq;
 
     for (const auto& intersection : intersections) {
-        distances[intersection.first] = std::numeric_limits<int>::max();
+        distances[intersection.first] = numeric_limits<int>::max();
     }
     distances[start] = 0;
     pq.push({0, start});
@@ -64,12 +65,12 @@ std::vector<int> TrafficManager::calculateShortestPath(int start, int destinatio
         }
     }
 
-    std::vector<int> path;
+    vector<int> path;
     for (int at = destination; at != start; at = previous[at]) {
         path.push_back(at);
     }
     path.push_back(start);
-    std::reverse(path.begin(), path.end());
+    reverse(path.begin(), path.end());
 
     return path;
 }
@@ -114,26 +115,26 @@ void TrafficManager::simulateVehicleMovement() {
 
 // Display the current status of the city (roads, intersections, and vehicles)
 void TrafficManager::displayCityStatus() {
-    std::cout << "City Status:" << std::endl;
-    std::cout << "Intersections:" << std::endl;
+    cout << "City Status:" << endl;
+    cout << "Intersections:" << endl;
     for (const auto& intersection : intersections) {
-        std::cout << "Intersection " << intersection.first 
-                  << " (Traffic Light: " << intersection.second.trafficLightStatus << ")" << std::endl;
+        cout << "Intersection " << intersection.first 
+                  << " (Traffic Light: " << intersection.second.trafficLightStatus << ")" << endl;
     }
 
-    std::cout << "Roads:" << std::endl;
+    cout << "Roads:" << endl;
     for (const auto& road : roads) {
-        std::cout << "Road " << road.first 
+        cout << "Road " << road.first 
                   << " (From Intersection " << road.second.startIntersection 
                   << " to Intersection " << road.second.endIntersection 
                   << ", Length: " << road.second.length 
-                  << ", Traffic Density: " << road.second.trafficDensity << ")" << std::endl;
+                  << ", Traffic Density: " << road.second.trafficDensity << ")" << endl;
     }
 
-    std::cout << "Vehicles:" << std::endl;
+    cout << "Vehicles:" << endl;
     for (const auto& vehicle : vehicles) {
-        std::cout << "Vehicle " << vehicle.id 
+        cout << "Vehicle " << vehicle.id 
                   << " (Current Position: Intersection " << vehicle.currentPosition 
-                  << ", Destination: Intersection " << vehicle.destination << ")" << std::endl;
+                  << ", Destination: Intersection " << vehicle.destination << ")" << endl;
     }
 }

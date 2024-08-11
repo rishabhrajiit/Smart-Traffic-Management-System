@@ -1,4 +1,5 @@
 #include "TrafficManager.hpp"
+using namespace std;
 
 int main() {
     TrafficManager trafficManager;
@@ -11,7 +12,7 @@ int main() {
 
     // Simulate traffic management for 5 iterations
     for (int i = 0; i < 5; i++) {
-        std::cout << "\nIteration " << i + 1 << ":\n";
+        cout << "\nIteration " << i + 1 << ":\n";
         trafficManager.controlTrafficSignals();
         trafficManager.updateTraffic();
         trafficManager.simulateVehicleMovement();

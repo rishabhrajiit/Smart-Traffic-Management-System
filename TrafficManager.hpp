@@ -7,12 +7,13 @@
 #include <queue>
 #include <limits>
 #include <algorithm>
+using namespace std;
 
 struct Intersection {
     int id;
     bool hasTrafficLight;
-    std::string trafficLightStatus;
-    std::vector<int> connectedRoads;
+    string trafficLightStatus;
+    vector<int> connectedRoads;
 };
 
 struct Road {
@@ -27,17 +28,17 @@ struct Vehicle {
     int id;
     int currentPosition;
     int destination;
-    std::vector<int> route;
+    vector<int> route;
 };
 
 class TrafficManager {
 public:
-    std::map<int, Intersection> intersections;
-    std::map<int, Road> roads;
-    std::vector<Vehicle> vehicles;
+    map<int, Intersection> intersections;
+    map<int, Road> roads;
+    vector<Vehicle> vehicles;
 
     void initializeCity(int numIntersections, int numRoads);
-    std::vector<int> calculateShortestPath(int start, int destination);
+    vector<int> calculateShortestPath(int start, int destination);
     void controlTrafficSignals();
     void updateTraffic();
     void simulateVehicleMovement();
